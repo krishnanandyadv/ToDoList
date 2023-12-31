@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+        }
+
+        #notepad-container {
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        #note-list {
+            list-style: none;
+            padding: 0;
+        }
+
+
+        .note {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            cursor: pointer;
+            color: #cc0000;
+        }
+
+        #new-note {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="notepad-container" style="height: 90vh; width: 80vw;">
+    <h2>TO DO LIST</h2>
+    <input type="text" style=" width:500PX; height:80px"id="new-note" placeholder="Enter your Task">
+    <button onclick="addNote()">Add Task</button>
+    <ul id="note-list"></ul>
+</div>
+
+<script>
+    function addNote() {
+        var noteText = document.getElementById('new-note').value;
+        if (noteText.trim() !== '') {
+            var noteList = document.getElementById('note-list');
+            var newNote = document.createElement('li');
+            newNote.className = 'note';
+            newNote.innerHTML = noteText + '<span class="delete-btn" onclick="deleteNote(this)">X</span>';
+            noteList.appendChild(newNote);
+            document.getElementById('new-note').value = '';
+        }
+    }
+
+    function deleteNote(element) {
+        var note = element.parentNode;
+        note.parentNode.removeChild(note);
+    }
+</script>
+
+</body>
+</html>
